@@ -9,7 +9,7 @@ spring:
       simple:
         acknowledge-mode: manual # 开启手动ack，控制消息在mq中的删除，重发。。。处理完毕
   datasource:
-    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=UTC
     username: root
-    password: 123456
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver # mysql8.0以前使用 com.mysql.jdbc.Driver

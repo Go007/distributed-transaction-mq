@@ -1,6 +1,11 @@
 package com.hong.dispatch.service;
 
+import com.hong.dispatch.entity.OrderDispatch;
+import com.hong.dispatch.mapper.OrderDispatchMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 /**
  * @author wanghong
@@ -9,11 +14,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class DispatchService {
 
-    /**
-     * 订单派送
-     * @param orderId
-     */
-    public void dispatch(Long orderId){
+    @Autowired
+    private OrderDispatchMapper orderDispatchMapper;
 
+    public void dispatch(String orderNum){
+        OrderDispatch orderDispatch = new OrderDispatch();
+        orderDispatch.setOrderNum(orderNum);
+        orderDispatch.setDispatchStatus("0");
+        orderDispatch.setDispatchContent("订单生成,即将派送");
+        LocalDateTime date = LocalDateTime.now();
+        orderDispatch.setCreateTime(date);
+        orderDispatch.setUpdateTime(date);
+        orderDispatchMapper.insert(orderDispatch);
     }
 }

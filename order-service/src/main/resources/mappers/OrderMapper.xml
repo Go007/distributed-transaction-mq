@@ -6,13 +6,14 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="user_id" property="userId" jdbcType="BIGINT"/>
         <result column="order_content" property="orderContent" jdbcType="VARCHAR"/>
+        <result column="order_num" property="orderNum" jdbcType="VARCHAR"/>
         <result column="order_status" property="orderStatus" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-    id,user_id, order_content, order_status,create_time,update_time
+    id,user_id, order_content,order_num, order_status,create_time,update_time
     </sql>
 
     <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -36,19 +37,37 @@
             <if test="orderStatus != null">
                 order_status,
             </if>
+            <if test="orderNum != null">
+                order_num,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 #{id},
             </if>
-            <if test="user_id != null">
+            <if test="userId != null">
                 #{userId},
             </if>
             <if test="orderContent != null">
                 #{orderContent},
             </if>
             <if test="orderStatus != null">
-                #{orderStatus}
+                #{orderStatus},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
             </if>
         </trim>
     </insert>

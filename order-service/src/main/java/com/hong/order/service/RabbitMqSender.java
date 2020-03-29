@@ -54,6 +54,6 @@ public class RabbitMqSender {
         // 消息唯一ID, CorrelationData 当收到消息回执时，会附带上这个参数
         CorrelationData correlationData = new CorrelationData(jsonObject.getString("msgId"));
         // @PostConstruct会在初始化时设置MQ回调处理函数
-        rabbitTemplate.convertAndSend("order.exchange", "order.rk", jsonObject.toJSONString(), correlationData);
+        rabbitTemplate.convertAndSend("order.exchange", "order.rk", jsonObject, correlationData);
     }
 }

@@ -32,6 +32,10 @@ public class OrderService {
     @Transactional
     public void createOrder(Order order) {
         // 1.插入订单数据
+        LocalDateTime date = LocalDateTime.now();
+        order.setCreateTime(date);
+        order.setUpdateTime(date);
+        order.setOrderNum(GUIDGenerator.genGUID());
         orderMapper.insert(order);
         // 2.插入消息记录表数据
         MessageLog msgLog = new MessageLog();
@@ -41,9 +45,9 @@ public class OrderService {
         // 设置消息状态为0 表示发送中
         msgLog.setMsgStatus("0");
         // 设置消息未确认超时时间窗口为 一分钟
-        LocalDateTime date = LocalDateTime.now();
         msgLog.setNextRetry(date .plusMinutes(1));
         msgLog.setBusinessKey("order_create");
+        msgLog.setCreateTime(date);
         msgLog.setCreateTime(date);
         messageLogMapper.insert(msgLog);
         // 3.发送消息到MQ

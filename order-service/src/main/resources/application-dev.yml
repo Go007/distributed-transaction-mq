@@ -8,7 +8,7 @@ spring:
     publisher-confirm-type: correlated  # 开启消息发送确认机制，监听回调
     publisher-returns: true
   datasource:
-    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=UTC
     username: root
-    password: 123456
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver # mysql8.0以前使用 com.mysql.jdbc.Driver

@@ -34,8 +34,8 @@ public class OrderDispatchConsumer {
         try {
             //消费者操作
             System.out.println("---------收到消息，开始消费---------");
-            Long orderId = order.getLong("id");
-            System.out.println("订单ID："+ orderId);
+            String  orderNum = order.getString("orderNum");
+            System.out.println("订单编号："+ orderNum);
 
             /**
              * Delivery Tag 用来标识信道中投递的消息。RabbitMQ 推送消息给 Consumer 时，会附带一个 Delivery Tag，
@@ -45,8 +45,8 @@ public class OrderDispatchConsumer {
             // Long deliveryTag = (Long) headers.get(AmqpHeaders.DELIVERY_TAG);
 
             // 幂等性，根据业务去重，防止重复消费，思路：记住以往处理过的数据
-            // 创建一条运单(最终一致)
-            dispatchService.dispatch(orderId);
+            // 创建一条运单(最终一致),这里可以设计orderId unique_key，这样有重复orderId插入时，数据库层会报错
+            dispatchService.dispatch(orderNum);
 
             /**
              *  multiple 取值为 false 时，表示通知 RabbitMQ 当前消息被确认

@@ -1,5 +1,6 @@
  CREATE TABLE IF NOT EXISTS `t_order` (
-  id BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '订单号',
+  id BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '订单ID',
+  order_num varchar(32) NOT NULL COMMENT '订单编号',
   user_id BIGINT(20) NOT NULL COMMENT '用户ID',
   order_status VARCHAR(10) DEFAULT NULL COMMENT '订单状态:1-支付中,2-支付成功,3-取消订单',
   order_content VARCHAR(256) NOT NULL COMMENT '订单内容(如买的商品,送货地址等)',
@@ -10,7 +11,7 @@
 
 CREATE TABLE IF NOT EXISTS t_order_dispatch(
   id BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '运单号',
-  order_id BIGINT(20) NOT NULL COMMENT '订单号',
+  order_num varchar(32) NOT NULL COMMENT '订单编号',
   dispatch_status VARCHAR(10) DEFAULT NULL COMMENT '调度状态',
   dispatch_content VARCHAR(256) DEFAULT NULL COMMENT '调度内容(送餐员，路线)',
   create_time DATETIME DEFAULT NULL COMMENT '创建时间',

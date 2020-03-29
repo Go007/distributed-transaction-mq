@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hong.order.mapper.OrderMapper">
+<mapper namespace="com.hong.dispatch.mapper.OrderDispatchMapper">
 
     <resultMap id="BaseResultMap" type="com.hong.dispatch.entity.OrderDispatch">
         <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="order_id" property="orderId" jdbcType="BIGINT"/>
+        <result column="order_num" property="orderNum" jdbcType="VARCHAR"/>
         <result column="dispatch_content" property="dispatchContent" jdbcType="VARCHAR"/>
         <result column="dispatch_status" property="dispatchStatus" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
@@ -12,7 +12,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    id,order_id, dispatch_content, dispatch_status,create_time,update_time
+    id,order_num, dispatch_content, dispatch_status,create_time,update_time
     </sql>
 
     <select id="selectByOrderId" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -27,8 +27,8 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="orderId != null">
-                order_id,
+            <if test="orderNum != null">
+                order_num,
             </if>
             <if test="dispatchContent != null">
                 dispatch_content,
@@ -36,19 +36,31 @@
             <if test="dispatchStatus != null">
                 dispatch_status,
             </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 #{id},
             </if>
-            <if test="dispatch_id != null">
-                #{dispatchId},
+            <if test="orderNum != null">
+                #{orderNum},
             </if>
             <if test="dispatchContent != null">
                 #{dispatchContent},
             </if>
             <if test="dispatchStatus != null">
-                #{dispatchStatus}
+                #{dispatchStatus},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
             </if>
         </trim>
     </insert>

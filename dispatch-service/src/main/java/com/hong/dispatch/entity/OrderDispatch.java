@@ -15,7 +15,7 @@ public class OrderDispatch implements Serializable {
     private static final long serialVersionUID = 9111357402963030257L;
 
     private Long id;
-    private Long orderId;
+    private String orderNum;
     private String dispatchStatus;
     private String dispatchContent;
     private LocalDateTime createTime;

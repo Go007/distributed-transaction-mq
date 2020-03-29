@@ -23,7 +23,7 @@ public final class GUIDGenerator {
     public static String genGUID(){
         String guid = "";
         try {
-            genTxNo(27);
+            guid = genTxNo(27);
         } catch (CodeException e) {
             e.printStackTrace();
         }
