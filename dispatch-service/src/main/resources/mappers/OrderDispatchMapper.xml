@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hong.order.mapper.OrderMapper">
+
+    <resultMap id="BaseResultMap" type="com.hong.dispatch.entity.OrderDispatch">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="order_id" property="orderId" jdbcType="BIGINT"/>
+        <result column="dispatch_content" property="dispatchContent" jdbcType="VARCHAR"/>
+        <result column="dispatch_status" property="dispatchStatus" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id,order_id, dispatch_content, dispatch_status,create_time,update_time
+    </sql>
+
+    <select id="selectByOrderId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_order_dispatch where order_id = #{orderId}
+    </select>
+
+    <insert id="insert" parameterType="com.hong.dispatch.entity.OrderDispatch">
+        INSERT INTO t_order_dispatch
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="orderId != null">
+                order_id,
+            </if>
+            <if test="dispatchContent != null">
+                dispatch_content,
+            </if>
+            <if test="dispatchStatus != null">
+                dispatch_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="dispatch_id != null">
+                #{dispatchId},
+            </if>
+            <if test="dispatchContent != null">
+                #{dispatchContent},
+            </if>
+            <if test="dispatchStatus != null">
+                #{dispatchStatus}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateStatusByOrderId">
+        update t_order_dispatch t
+        set t.dispatch_status = #{dispatchStatus}
+        where t.order_id = #{orderId}
+    </update>
+
+</mapper>
