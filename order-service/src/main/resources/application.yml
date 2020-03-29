@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: order-serice
+  profiles:
+    active: dev
+
+server:
+  port: 8001
+  servlet:
+    context-path: /
+
+mybatis:
+  type-aliases-package: com.hong.order
+  mapper-locations: classpath*:/mappers/*.xml
+

@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: dispatch-serice
+  profiles:
+    active: dev
+
+server:
+  port: 8002
+  servlet:
+    context-path: /
+
+mybatis:
+  type-aliases-package: com.hong.dispatch
+  mapper-locations: classpath*:/mappers/*.xml
+
+

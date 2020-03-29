@@ -1,0 +1,14 @@
+spring:
+  rabbitmq:
+    addresses: 192.168.157.129:5672
+    username: root
+    password: 123456
+    virtual-host: /
+    # mq生产端配置
+    publisher-confirm-type: correlated  # 开启消息发送确认机制，监听回调
+    publisher-returns: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver # mysql8.0以前使用 com.mysql.jdbc.Driver
